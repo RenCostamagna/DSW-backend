@@ -3,7 +3,7 @@
 GET http://localhost:3000/api/clientes
 
 ### obtener un unico cliente
-GET http://localhost:3000/api/clientes/INIA
+GET http://localhost:3000/api/clientes/UNO
 
 ### dar de alta un cliente
 POST http://localhost:3000/api/clientes
@@ -17,7 +17,7 @@ Content-Type: application/json
     "telefono": ""
 }
 ### modificar un cliente
-PUT http://localhost:3000/api/clientes/INIA
+PUT http://localhost:3000/api/clientes/UNO
 Content-Type: application/json
 
 {

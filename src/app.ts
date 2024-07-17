@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from 'express'
 import { Hamburguesa } from './hamburguesa.js'
 import { Cliente} from './cliente.js'
-
+import { Ingrediente} from './ingrediente.js'
 const app = express()
 app.use(express.json())
 // get(para obtener info sobre recursos) ; post(crear nuevos recursos) ; delete(borrar recursos)
@@ -12,6 +12,13 @@ app.use(express.json())
 // delete /api/characters/:id (Borrar character con id = :id)
 //put & patch/api/characters/:id (Modificar character con id =:id)
 
+const ingredientes: Ingrediente[] = [
+    new Ingrediente(
+        '1',
+        'pepino',
+        0,
+    ),
+]
 
 const hamburguesas: Hamburguesa[] = [
     new Hamburguesa(
@@ -29,6 +36,14 @@ const clientes: Cliente[] = [
     ),
 ]
 
+function sanitizeIngredienteInput(req: Request, res: Response, next:NextFunction){
+    req.body.sanitizedEnter ={
+        codIngrediente: req.body.codIngrediente,
+        descripcion: req.body.descripcion,
+        stock: req.body.stock,
+    }
+    next()
+}
 
 function sanitizeHamburguesaInput(req: Request, res: Response, next:NextFunction){
     req.body.sanitizedInput ={
@@ -49,12 +64,25 @@ function sanitizeClienteInput(req: Request, res: Response, next:NextFunction){
     next()
 }
 
+app.get('/api/ingredientes', (req,res)=>{
+    res.json(ingredientes)
+})
+
 app.get('/api/clientes', (req,res)=>{
     res.json(clientes)
 })
 
 app.get('/api/hamburguesas', (req,res)=>{
     res.json(hamburguesas)
+})
+
+
+app.get('/api/ingredientes/:codIngrediente', (req,res)=>{
+    const ingrediente = ingredientes.find((ingrediente) => ingrediente.codIngrediente === req.params.codIngrediente) ///para que recupere el personaje con el q coincide el id
+    if(!ingrediente){
+        res.status(404).send({message: 'ingrediente Not Found'})
+    }
+    res.json(ingrediente)
 })
 
 app.get('/api/clientes/:idCliente', (req,res)=>{
@@ -89,6 +117,15 @@ app.post('/api/hamburguesas',sanitizeHamburguesaInput, (req, res) => {
     res.status(201).send({message: 'HAMBURGUESA CREADA', data: hamburguesa})
 })
 
+app.post('/api/ingredientes',sanitizeIngredienteInput, (req, res) => {
+    const enter= req.body.sanitizedEnter
+    const ingrediente = new Ingrediente(enter.codIngrediente,enter.descripcion,enter.stock)
+    ingredientes.push(ingrediente)
+    res.status(201).send({message: 'INGREDIENTE CREADA', data: ingrediente})
+})
+
+
+
 app.put('/api/clientes/:idCliente',sanitizeClienteInput, (req,res)=>{
     const clienteIdx = clientes.findIndex((cliente) => cliente.idCliente === req.params.idCliente) ///para que recupere el personaje con el q coincide el id
     if(clienteIdx===-1){
@@ -111,6 +148,17 @@ app.put('/api/hamburguesas/:nomHamburguesa',sanitizeHamburguesaInput, (req,res)=
        
 })
 
+app.put('/api/ingredientes/:codIngrediente',sanitizeIngredienteInput, (req,res)=>{
+    const ingredienteIdx = ingredientes.findIndex((ingrediente) => ingrediente.codIngrediente === req.params.codIngrediente) ///para que recupere el personaje con el q coincide el id
+    if(ingredienteIdx===-1){
+        res.status(404).send({message: 'ingrediente Not Found'})
+    }
+
+    ingredientes[ingredienteIdx] = { ...ingredientes[ingredienteIdx], ...req.body.sanitizedEnter}
+    res.status(200).send({message: 'INGREDIENTE MODIFICADO CORRECTAMENTE', data: ingredientes[ingredienteIdx]})
+
+       
+})
 app.delete('/api/hamburguesas/:nomHamburguesa', (req,res)=>{
     const hamburguesaIdx = hamburguesas.findIndex((hamburguesa) => hamburguesa.nomHamburguesa === req.params.nomHamburguesa)
     if(hamburguesaIdx===-1){
@@ -128,6 +176,16 @@ app.delete('/api/clientes/:idCliente', (req,res)=>{
     clientes.splice(clienteIdx,1)
     res.status(200).send({message: 'CLIENTE ELIMINADO CORRECTAMENTE'})
 })
+
+app.delete('/api/ingredientes/:codIngrediente', (req,res)=>{
+    const ingredienteIdx = ingredientes.findIndex((ingrediente) => ingrediente.codIngrediente === req.params.codIngrediente)
+    if(ingredienteIdx===-1){
+        res.status(404).send({message: 'Ingredientes Not Found'})
+    }
+    ingredientes.splice(ingredienteIdx,1)
+    res.status(200).send({message: 'INGREDIENTE ELIMINADO CORRECTAMENTE'})
+})
+
 
 app.listen(3000,() =>{
     console.log('Server is running on http://localhost:3000/')

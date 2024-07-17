@@ -1,0 +1,30 @@
+### obtener todas los ingredientes
+GET http://localhost:3000/api/ingredientes
+
+
+### obtener un unico ingrediente
+GET http://localhost:3000/api/ingredientes/1
+
+
+### crear un ingrediente
+POST http://localhost:3000/api/ingredientes
+Content-Type: application/json
+
+{
+    "codIngrediente": "2",
+    "descripcion": "dsasasd",
+    "stock": 5,
+}
+
+### modificar un ingrediente
+PUT http://localhost:3000/api/ingredientes/1
+Content-Type: application/json
+
+{
+    "codIngrediente": "3",
+    "descripcion": "BOCA",
+    "stock": 9,
+}
+
+### borrar un ingrediente
+DELETE http://localhost:3000/api/ingredientes/1
