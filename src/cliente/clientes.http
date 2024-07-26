@@ -1,0 +1,43 @@
+### obtener todos los clientes
+
+GET http://localhost:3000/api/clientes
+
+### obtener un unico cliente
+GET http://localhost:3000/api/clientes/UNO
+
+### dar de alta un cliente
+POST http://localhost:3000/api/clientes
+Content-Type: application/json
+
+{
+    "idCliente": "dsdsaads",
+    "nombre": "REN",
+    "apellido": "",
+    "direccion": "",
+    "telefono": ""
+}
+### modificar un cliente
+PUT http://localhost:3000/api/clientes/UNO
+Content-Type: application/json
+
+{
+    "idCliente": "ssa",
+    "nombre": "REN",
+    "apellido": "asd",
+    "direccion": "fgh",
+    "telefono": ""
+}
+
+###modificar un cliente con patch
+PATCH http://localhost:3000/api/clientes/UNO
+Content-Type: application/json
+
+    {    
+        "idCliente": "ssa",
+        "nombre": "REN",
+        "apellido": "asd",
+        "direccion": "fgh",
+        "telefono": ""
+    }
+### borrar un cliente
+DELETE http://localhost:3000/api/clientes/dsdsaads
