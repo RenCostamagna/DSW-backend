@@ -14,13 +14,22 @@ Content-Type: application/json
     "descripcion": "dsasasd"
 }
 ### modificar una hamburguesa
-PUT http://localhost:3000/api/hamburguesas/INIA
+PUT http://localhost:3000/api/hamburguesas/dsdsads
 Content-Type: application/json
 
 {
-    "nomHamburguesa": "dsdsaads",
-    "descripcion": "REN"
+    "nomHamburguesa": "dsdaads",
+    "descripcion": "juan"
+}
+
+### modificar una hamburguesa con patch
+PATCH http://localhost:3000/api/hamburguesas/SDASD
+Content-Type: application/json
+
+{
+    "nomHamburguesa": "SDASD",
+    "descripcion": "juSASDn"
 }
 
 ### borrar una hamburguesa
-DELETE http://localhost:3000/api/hamburguesas/dsdsaads
+DELETE http://localhost:3000/api/hamburguesas/INIA

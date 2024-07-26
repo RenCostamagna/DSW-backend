@@ -21,12 +21,23 @@ PUT http://localhost:3000/api/clientes/UNO
 Content-Type: application/json
 
 {
-    "idCliente": "dsdsaads",
+    "idCliente": "ssa",
     "nombre": "REN",
-    "apellido": "",
-    "direccion": "",
+    "apellido": "asd",
+    "direccion": "fgh",
     "telefono": ""
 }
 
+###modificar un cliente con patch
+PATCH http://localhost:3000/api/clientes/UNO
+Content-Type: application/json
+
+    {    
+        "idCliente": "ssa",
+        "nombre": "REN",
+        "apellido": "asd",
+        "direccion": "fgh",
+        "telefono": ""
+    }
 ### borrar un cliente
 DELETE http://localhost:3000/api/clientes/dsdsaads
