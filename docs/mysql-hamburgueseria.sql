@@ -1,5 +1,6 @@
 create database if not exists hamburgueseria;
 
+<<<<<<< HEAD
 
 use hamburgueseria;
 
@@ -135,3 +136,10 @@ INSERT INTO precios (idHamburguesa, fechaVigencia, precio) VALUES
 (1, '2024-02-01', 5.00),  -- Cheeseburger
 (2, '2024-03-01', 6.50),  -- Bacon Burger
 (3, '2024-01-01', 7.00);  -- Veggie Burger
+=======
+use hamburgueseria;
+
+create user if not exists dsw@'%' identified by 'dsw';
+GRANT SELECT, UPDATE, INSERT, DELETE ON hamburgueseria.* TO 'dsw'@'%';
+
+>>>>>>> e7a76e0cf7aca9e235844ca5c924df843c638955
