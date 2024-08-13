@@ -1,5 +1,5 @@
-import { Router } from "express";
-import { sanitizeIngredienteInput,findAll,findOne,add,update,remove } from "./ingrediente.controler.js";
+import { Router } from "express"
+import { sanitizeIngredienteInput,findAll,findOne,add,update,remove } from "./ingrediente.controler.js"
 
 export const ingredienteRouter = Router()
 
@@ -8,4 +8,6 @@ ingredienteRouter.get('/:codIngrediente', findOne)
 ingredienteRouter.post('/', sanitizeIngredienteInput, add)
 ingredienteRouter.put('/:codIngrediente', sanitizeIngredienteInput,update)
 ingredienteRouter.patch('/:codIngrediente', sanitizeIngredienteInput, update)
-ingredienteRouter.delete('/:codIngrediente',remove)
+ingredienteRouter.delete('/:codIngrediente',remove) 
+
+///PUEDE LLEGAR A SER id EN CAMBIO DE CODINGREDIENTE

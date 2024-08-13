@@ -1,5 +1,9 @@
 import { Repository } from "../shared/repository.js";
 import { Cliente } from "./cliente.entity.js";
+import { pool } from "../shared/db/conn.mysql.js";
+import { ResultSetHeader, RowDataPacket } from "mysql2";
+
+
 
 const clientes: Cliente[] = [
     new Cliente(
@@ -7,33 +11,45 @@ const clientes: Cliente[] = [
         'INIAKI',
         'DIAZ',
         'ASSDD',
-        '1345',
+        1345,
     ),
 ]
 export class ClienteRepository implements Repository<Cliente>{
-    public async findAll(): Promise< Cliente[] | undefined> {
-        return clientes
+    public async findAll(): Promise< Cliente[]| undefined>  {
+        const [clientes] = await pool.query('select * from clientes')
+        return clientes as Cliente[]  
     }
-    public async findOne(item: { id: string }): Promise<Cliente | undefined> {
-        return clientes.find((cliente) => cliente.idCliente === item.id)
-    }
-    public add(item: Cliente): Cliente | undefined {
-        clientes.push(item)
-        return(item)
-    }
-    public update(item: Cliente): Cliente | undefined {
-        const clienteIdx = clientes.findIndex((cliente) => cliente.idCliente === item.idCliente) 
-        if(clienteIdx !== -1){
-            clientes[clienteIdx] = { ...clientes[clienteIdx], ...item}
+    public async findOne(item: { id: string }): Promise< Cliente | undefined> {
+        const id = Number.parseInt(item.id)
+        const [clientes] = await pool.query<RowDataPacket[]>('select * from clientes where idCliente = ?', [id])
+        if(clientes.length === 0){
+            return undefined
         }
-        return clientes[clienteIdx]
+        const cliente = clientes[0] as Cliente
+        return cliente
     }
-    public delete(item: { id: string; }): Cliente | undefined {
-        const clienteIdx = clientes.findIndex((cliente) => cliente.idCliente === item.id)
-        if(clienteIdx !==-1){
-            const deletedClientes = clientes[clienteIdx]
-            clientes.splice(clienteIdx, 1)
-            return deletedClientes
+
+    public async add(clienteInput: Cliente): Promise<Cliente | undefined> {
+        const {idCliente,...clienteRow}=clienteInput
+        const [result]= await pool.query<ResultSetHeader>('insert into clientes set ?', [clienteRow])
+        clienteInput.idCliente=result.insertId
+        return clienteInput
+    }
+    public async update(id:string, clienteInput:Cliente): Promise<Cliente | undefined> {
+        const clienteId= Number.parseInt(id)
+        const {idCliente, ...clienteRow} = clienteInput
+        await pool.query ('update clientes set? where idCliente =?', [clienteRow, clienteId])
+        return await this.findOne({id})
+
+    }
+    public async delete(item: { id: string; }): Promise<Cliente | undefined>{
+        try{
+            const ClienteToDelete = await this.findOne(item)
+            const clienteId= Number.parseInt(item.id)
+            await pool.query('delete from clientes where idCliente =?', clienteId)
+            return ClienteToDelete
+        } catch(error: any) {
+            throw new Error('unable to delete Cliente')
         }
     }
 }   

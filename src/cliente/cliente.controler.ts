@@ -13,7 +13,7 @@ function sanitizeClienteInput(req: Request, res: Response, next:NextFunction){
     }
     next()
 }
-
+/*
 function findAll(req:Request,res:Response){
     res.json({data: repository.findAll()})
 }
@@ -47,6 +47,48 @@ function update(req: Request, res: Response){ ///puede ser :idCliente
 function remove(req: Request,res: Response){
     const id = req.params.idCliente //puede ser id
     const cliente = repository.delete({id})
+    if(!cliente){
+        res.status(404).send({message: 'Cliente Not Found'})
+    } else{
+        res.status(200).send({message: 'CLIENTE ELIMINADO CORRECTAMENTE'})
+    } 
+}
+
+export{sanitizeClienteInput, findAll, findOne,add, update, remove}+]*/
+
+async function findAll(req:Request,res:Response){
+    res.json({data:await repository.findAll()})
+}
+
+async function findOne(req:Request,res: Response){
+    const cliente = await repository.findOne({id:req.params.idCliente}) 
+    if(!cliente){
+        return res.status(404).send({message: 'Cliente Not Found'})
+    }
+    res.json(cliente)
+}
+
+async function add(req: Request, res: Response){
+    const data= req.body.sanitizedData
+    const clienteData = new Cliente(data.idCliente,data.nombre, data.apellido,data.direccion,data.telefono)
+    const cliente = await repository.add(clienteData)
+    return res.status(201).send({message: 'CLIENTE CREADO', data: cliente})
+}  
+
+
+async function update(req: Request, res: Response){ 
+    req.body.sanitizedData.idCliente = req.params.idCliente
+    const cliente = await repository.update(req.params.idCliente, req.body.sanitizedData) ///puede ser id
+    if(!cliente){
+        return res.status(404).send({message: 'Cliente Not Found'})
+    }
+    return res.status(200).send({message: 'CLIENTE MODIFICADO CORRECTAMENTE', data:cliente})
+}
+
+
+async function remove(req: Request,res: Response){
+    const id = req.params.idCliente //puede ser id
+    const cliente =await repository.delete({id})
     if(!cliente){
         res.status(404).send({message: 'Cliente Not Found'})
     } else{

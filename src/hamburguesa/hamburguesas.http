@@ -3,7 +3,7 @@
 GET http://localhost:3000/api/hamburguesas
 
 ### obtener una unica hamburguesa
-GET http://localhost:3000/api/hamburguesas/INIA
+GET http://localhost:3000/api/hamburguesas/2
 
 ### crear una hamburguesa
 POST http://localhost:3000/api/hamburguesas
@@ -14,7 +14,7 @@ Content-Type: application/json
     "descripcion": "dsasasd"
 }
 ### modificar una hamburguesa
-PUT http://localhost:3000/api/hamburguesas/dsdsads
+PUT http://localhost:3000/api/hamburguesas/12
 Content-Type: application/json
 
 {
@@ -32,4 +32,4 @@ Content-Type: application/json
 }
 
 ### borrar una hamburguesa
-DELETE http://localhost:3000/api/hamburguesas/INIA
+DELETE http://localhost:3000/api/hamburguesas/12
