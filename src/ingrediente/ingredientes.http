@@ -3,7 +3,7 @@ GET http://localhost:3000/api/ingredientes
 
 
 ### obtener un unico ingrediente
-GET http://localhost:3000/api/ingredientes/1
+GET http://localhost:3000/api/ingredientes/2
 
 
 ### crear un ingrediente

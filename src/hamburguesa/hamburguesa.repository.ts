@@ -1,6 +1,6 @@
 import { Repository } from "../shared/repository.js";
 import { Hamburguesa } from "./hamburguesa.entity.js";
-
+import { pool } from "../shared/db/conn.mysql.js";
 
 
 const hamburguesas: Hamburguesa[] = [
@@ -11,11 +11,18 @@ const hamburguesas: Hamburguesa[] = [
 ]
 
 export class HamburguesaRepository implements Repository<Hamburguesa>{
-    public findAll(): Hamburguesa[] | undefined {
-        return hamburguesas
+    public async findAll(): Promise<Hamburguesa[] | undefined> {
+        const [hamburguesas] = await pool.query('select * from hamburguesas')
+        return hamburguesas as Hamburguesa[]
     }
-    public findOne(item: { id: string; }): Hamburguesa | undefined {
-        return hamburguesas.find((hamburguesa) => hamburguesa.nomHamburguesa === item.id)
+    public async findOne(item: { id: string }): Promise<Hamburguesa | undefined> {
+        const id = Number.parseInt(item.id)
+        
+        if(hamburguesas.length === 0){
+            return undefined
+        }
+        const hamburguesa = hamburguesas[0] as Hamburguesa
+        return hamburguesa
     }
     public add(item: Hamburguesa): Hamburguesa | undefined {
         hamburguesas.push(item)

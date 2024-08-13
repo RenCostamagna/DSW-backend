@@ -11,10 +11,10 @@ const clientes: Cliente[] = [
     ),
 ]
 export class ClienteRepository implements Repository<Cliente>{
-    public findAll(): Cliente[] | undefined {
+    public async findAll(): Promise< Cliente[] | undefined> {
         return clientes
     }
-    public findOne(item: { id: string; }): Cliente | undefined {
+    public async findOne(item: { id: string }): Promise<Cliente | undefined> {
         return clientes.find((cliente) => cliente.idCliente === item.id)
     }
     public add(item: Cliente): Cliente | undefined {
