@@ -11,6 +11,7 @@ const clientes: Cliente[] = [
         'INIAKI',
         'DIAZ',
         'ASSDD',
+        'inakidiaz@yahoo.es',
         1345,
     ),
 ]
@@ -31,9 +32,10 @@ export class ClienteRepository implements Repository<Cliente>{
 
     public async add(clienteInput: Cliente): Promise<Cliente | undefined> {
         const {idCliente,...clienteRow}=clienteInput
-        const [result]= await pool.query<ResultSetHeader>('insert into clientes set ?', [clienteRow])
+        const [result]= await pool.query<ResultSetHeader>('INSERT INTO clientes SET ?', [clienteRow])
         clienteInput.idCliente=result.insertId
-        return clienteInput
+
+        return clienteInput;
     }
     public async update(id:string, clienteInput:Cliente): Promise<Cliente | undefined> {
         const clienteId= Number.parseInt(id)

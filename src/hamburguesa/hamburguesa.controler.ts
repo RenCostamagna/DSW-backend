@@ -3,12 +3,13 @@ import { HamburguesaRepository } from "./hamburguesa.repository.js"
 import { Hamburguesa } from "./hamburguesa.entity.js"
 
 
-const repository_2 = new HamburguesaRepository
+const repository_2 = new HamburguesaRepository ()
 
 
  function sanitizeHamburguesaInput(req: Request, res: Response, next:NextFunction){
     req.body.sanitizedInput ={
-        nomHamburguesa: req.body.nomHamburguesa,
+        idHamburguesa: req.body.idHamburguesa,
+        nombre: req.body.nombre,
         descripcion: req.body.descripcion,
     }
     next()
@@ -28,7 +29,7 @@ async function findOne(req:Request,res: Response){
 
 async function add(req:Request, res:Response){
     const data= req.body.sanitizedInput
-    const hamburguesaInput = new Hamburguesa(data.idHamburguesa,data.nomHamburguesa,data.descripcion)
+    const hamburguesaInput = new Hamburguesa(data.nombre,data.descripcion)
     const hamburguesa = await repository_2.add(hamburguesaInput)
     return res.status(201).send({message: 'HAMBURGUESA CREADA', data: hamburguesa})
 }

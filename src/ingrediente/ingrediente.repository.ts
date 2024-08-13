@@ -32,10 +32,10 @@ export class IngredienteRepository implements Repository<Ingrediente> {
     }
     public async add(ingredienteInput: Ingrediente): Promise<Ingrediente | undefined>{ ///puede ser la funct de sanitize
         const{codIngrediente, ...ingredienteRow} = ingredienteInput
-        const [result] = await pool.query<ResultSetHeader> ('insert into ingredientes set ?', [ingredienteRow])
+        const [result] = await pool.query<ResultSetHeader> ('INSERT INTO ingredientes SET ?', [ingredienteRow])
         ingredienteInput.codIngrediente = result.insertId
 
-        return ingredienteInput
+        return ingredienteInput;
 
     }
     public async update(id:string, ingredienteInput:Ingrediente): Promise<Ingrediente | undefined> {

@@ -16,7 +16,7 @@ export class HamburguesaRepository implements Repository<Hamburguesa>{
         const [hamburguesas] = await pool.query('select * from hamburguesas')
         return hamburguesas as Hamburguesa[]
     }
-    public async findOne(item: { id: string }): Promise< Hamburguesa | undefined> {
+    public async findOne(item: { id:string  }): Promise< Hamburguesa | undefined> {
         const id = Number.parseInt(item.id)
         const [hamburguesas] = await pool.query<RowDataPacket[]>('select * from hamburguesas where idHamburguesa = ?', [id])
         if(hamburguesas.length === 0){
@@ -27,9 +27,10 @@ export class HamburguesaRepository implements Repository<Hamburguesa>{
     }
     public async add(HamburguesaInput: Hamburguesa): Promise<Hamburguesa | undefined> {
         const {idHamburguesa,...HamburguesaRow}=HamburguesaInput
-        const [result]=await pool.query<ResultSetHeader> ('insert into hamburguesas set ?', [HamburguesaRow])
+        const [result]=await pool.query<ResultSetHeader> ('INSERT INTO hamburguesas SET ?', [HamburguesaRow])
         HamburguesaInput.idHamburguesa=result.insertId
-        return HamburguesaInput
+        
+        return HamburguesaInput;
     }
     public async update(id:string, hamburguesaInput:Hamburguesa): Promise<Hamburguesa | undefined> {
         const hamburguesaId= Number.parseInt(id)

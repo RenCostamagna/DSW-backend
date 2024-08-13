@@ -3,7 +3,7 @@ import { IngredienteRepository } from "./ingrediente.repository.js"
 import { Ingrediente } from "./ingrediente.entity.js"
 
 
-const repository_3 = new IngredienteRepository
+const repository_3 = new IngredienteRepository ()
 
 
 function sanitizeIngredienteInput(req: Request, res: Response, next:NextFunction){
@@ -28,9 +28,9 @@ async function findOne(req:Request,res:Response){
 
 async function add(req: Request, res:Response){
     const enter= req.body.sanitizedEnter
-    const ingredienteEnter = new Ingrediente(enter.codIngrediente,enter.descripcion,enter.stock)
-    const ingrediente = repository_3.add(ingredienteEnter)
-    return res.status(201).send({message: 'INGREDIENTE CREADA', data: ingrediente})
+    const ingredienteEnter = new Ingrediente(enter.descripcion,enter.stock)
+    const ingrediente = await repository_3.add(ingredienteEnter)
+    return res.status(201).send({message: 'INGREDIENTE CREADO', data: ingrediente})
 }
 
 async function update(req:Request,res:Response){

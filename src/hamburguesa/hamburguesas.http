@@ -3,23 +3,23 @@
 GET http://localhost:3000/api/hamburguesas
 
 ### obtener una unica hamburguesa
-GET http://localhost:3000/api/hamburguesas/2
+GET http://localhost:3000/api/hamburguesas/3
 
 ### crear una hamburguesa
 POST http://localhost:3000/api/hamburguesas
 Content-Type: application/json
 
 {
-    "nomHamburguesa": "dsdsads",
-    "descripcion": "dsasasd"
+    "nombre": "MEGA BACON",
+    "descripcion": "bacon, huevo, cheddar con 2 patys"
 }
 ### modificar una hamburguesa
-PUT http://localhost:3000/api/hamburguesas/12
+PUT http://localhost:3000/api/hamburguesas/8
 Content-Type: application/json
 
 {
-    "nomHamburguesa": "dsdaads",
-    "descripcion": "juan"
+    "nombre": "Mega Burguer",
+    "descripcion": "2 patys con chimichurri"
 }
 
 ### modificar una hamburguesa con patch
@@ -32,4 +32,4 @@ Content-Type: application/json
 }
 
 ### borrar una hamburguesa
-DELETE http://localhost:3000/api/hamburguesas/12
+DELETE http://localhost:3000/api/hamburguesas/4

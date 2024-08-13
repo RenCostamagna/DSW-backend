@@ -11,26 +11,26 @@ POST http://localhost:3000/api/ingredientes
 Content-Type: application/json
 
 {
-    "descripcion": 4,
-    "stock": "Ketchup"
+    "descripcion": "SALSA GOLF",
+    "stock": 20
 }
 
 ### modificar un ingrediente
-PUT http://localhost:3000/api/ingredientes/2
+PUT http://localhost:3000/api/ingredientes/9
 Content-Type: application/json
 
 {
-    "descripcion": "Queso",
+    "descripcion": "Mayonesa",
     "stock": 5
 }
 
 ###modificar un ingrediente con patch
-PATCH http://localhost:3000/api/ingredientes/4
+PATCH http://localhost:3000/api/ingredientes/9
 Content-Type: application/json
 {
-    "descripcion": "asassadsads",
-    "stock": 6
+    "descripcion": "chimichurri",
+    "stock": 9
 }
 
 ### borrar un ingrediente
-DELETE http://localhost:3000/api/ingredientes/30
+DELETE http://localhost:3000/api/ingredientes/9
