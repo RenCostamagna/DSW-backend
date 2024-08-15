@@ -10,4 +10,3 @@ ingredienteRouter.put('/:codIngrediente', sanitizeIngredienteInput,update)
 ingredienteRouter.patch('/:codIngrediente', sanitizeIngredienteInput, update)
 ingredienteRouter.delete('/:codIngrediente',remove) 
 
-///PUEDE LLEGAR A SER id EN CAMBIO DE CODINGREDIENTE

@@ -3,13 +3,7 @@ import { Hamburguesa } from "./hamburguesa.entity.js";
 import { pool } from "../shared/db/conn.mysql.js";
 import { ResultSetHeader, RowDataPacket } from "mysql2";
 
-const hamburguesas: Hamburguesa[] = [
-    new Hamburguesa(
-        'b',
-        'a',
-        20
-    ),
-]
+
 
 export class HamburguesaRepository implements Repository<Hamburguesa>{
     public async findAll(): Promise<Hamburguesa[] | undefined> {

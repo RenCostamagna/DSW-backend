@@ -10,32 +10,34 @@ POST http://localhost:3000/api/clientes
 Content-Type: application/json
 
 {
-    "nombre": "REN",
-    "apellido": "costa",
-    "direccion": "abc 1244",
-    "telefono": "341323213"
+    "nombre": "Augus",
+    "apellido": "Palmi",
+    "telefono": "341323213",
+    "email": "augustoGOAT@gmail.com",
+    "direccion": "UTN 1244"
 }
 ### modificar un cliente
 PUT http://localhost:3000/api/clientes/1
 Content-Type: application/json
 
 {
-    "nombre": "REN",
-    "apellido": "asd",
-    "direccion": "fgh",
-    "telefono": ""
+    "nombre": "JUAN ROMAN",
+    "apellido": "RIQUELME",
+    "telefono": "34132322",
+    "email": "BOQUITA@gmail.com",
+     "direccion": "CASA AMARILLA 1244"
 }
 
 ###modificar un cliente con patch
-PATCH http://localhost:3000/api/clientes/UNO
+PATCH http://localhost:3000/api/clientes/14
 Content-Type: application/json
 
     {    
-        "idCliente": "ssa",
-        "nombre": "REN",
-        "apellido": "asd",
-        "direccion": "fgh",
-        "telefono": ""
+        "nombre": "Augus",
+        "apellido": "Palmi",
+        "telefono": "341323213",
+        "email": "augustoGOAT@gmail.com",
+        "direccion": "UTN 1244"
     }
 ### borrar un cliente
 DELETE http://localhost:3000/api/clientes/3

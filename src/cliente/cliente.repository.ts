@@ -5,15 +5,6 @@ import { ResultSetHeader, RowDataPacket } from "mysql2";
 
 
 
-const clientes: Cliente[] = [
-    new Cliente(
-        'UNO',
-        'INIAKI',
-        'DIAZ',
-        'ASSDD',
-        1345,
-    ),
-]
 export class ClienteRepository implements Repository<Cliente>{
     public async findAll(): Promise< Cliente[]| undefined>  {
         const [clientes] = await pool.query('select * from clientes')
@@ -31,7 +22,7 @@ export class ClienteRepository implements Repository<Cliente>{
 
     public async add(clienteInput: Cliente): Promise<Cliente | undefined> {
         const {idCliente,...clienteRow}=clienteInput
-        const [result]= await pool.query<ResultSetHeader>('insert into clientes set ?', [clienteRow])
+        const [result]= await pool.query<ResultSetHeader>('INSERT INTO clientes SET ?', [clienteRow])
         clienteInput.idCliente=result.insertId
         return clienteInput
     }
