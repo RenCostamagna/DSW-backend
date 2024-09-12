@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS clientes (
     apellido VARCHAR(255)  NULL,
     telefono VARCHAR(20) NULL, 
     email VARCHAR(60)  NULL,
+    direccion VARCHAR(60) NULL,
     PRIMARY KEY (idCliente)
 );
 

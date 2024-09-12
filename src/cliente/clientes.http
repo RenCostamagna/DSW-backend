@@ -13,8 +13,8 @@ Content-Type: application/json
     "nombre": "Augus",
     "apellido": "Palmi",
     "telefono": "341323213",
-    "email": "augustoGOAT@gmail.com",
-    "direccion": "UTN 1244"
+    "email": "augustoGOAT@gmail.com"
+
 }
 ### modificar un cliente
 PUT http://localhost:3000/api/clientes/1
@@ -25,7 +25,7 @@ Content-Type: application/json
     "apellido": "RIQUELME",
     "telefono": "34132322",
     "email": "BOQUITA@gmail.com",
-     "direccion": "CASA AMARILLA 1244"
+    "direccion": "CASA AMARILLA 1244"
 }
 
 ###modificar un cliente con patch
