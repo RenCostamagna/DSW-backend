@@ -11,8 +11,8 @@ POST http://localhost:3000/api/ingredientes
 Content-Type: application/json
 
 {
-    "descripcion": "MAYONESA",
-    "stock": 4
+    "descripcion": "CARNE HUMANA",
+    "stock": 9
 }
 
 ### modificar un ingrediente
