@@ -3,7 +3,7 @@ import cors from 'cors';
 import { clienteRouter } from './cliente/cliente.routes.js'
 import { hamburguesaRouter } from './hamburguesa/hamburguesa.routes.js'
 import { ingredienteRouter } from './ingrediente/ingrediente.routes.js'
-
+import { pedidoRouter } from './pedido/pedido.routes.js';
 
 
 const app = express();
@@ -18,6 +18,7 @@ app.use(cors({
 app.use('/api/clientes', clienteRouter);
 app.use('/api/hamburguesas', hamburguesaRouter);
 app.use('/api/ingredientes', ingredienteRouter);
+app.use('/api/pedidos', pedidoRouter)
 
 
 app.use((_, res) => {

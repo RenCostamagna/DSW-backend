@@ -22,7 +22,8 @@ CREATE TABLE IF NOT EXISTS pedidos (
     idPedido INT UNSIGNED NOT NULL AUTO_INCREMENT,
     idCliente INT UNSIGNED NOT NULL,
     modalidad VARCHAR(100)  NULL,
-    montoTotal DECIMAL(10, 2)  NULL,  
+    montoTotal DECIMAL(10, 2)  NULL,
+    estado VARCHAR(45) NULL,  
     PRIMARY KEY (idPedido),
     CONSTRAINT fk_pedidos_clientes
     FOREIGN KEY (idCliente) REFERENCES clientes(idCliente)

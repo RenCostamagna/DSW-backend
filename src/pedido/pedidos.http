@@ -1,0 +1,44 @@
+### obtener todos los pedidos
+GET http://localhost:3000/api/pedidos
+
+
+### obtener un unico pedido
+GET http://localhost:3000/api/pedidos/2
+
+
+### crear un pedido
+POST http://localhost:3000/api/pedidos
+Content-Type: application/json
+
+{
+    "modalidad": "COMER EN HAMBURGUESERIA",
+    "montoTotal": 5,
+    "estado": "EN PROCESO",
+    "idCliente": 2
+    
+}
+
+### modificar un pedido
+PUT http://localhost:3000/api/pedidos/2
+Content-Type: application/json
+
+{
+    "modalidad": "COMER EN HAMBURGUESERIA",
+    "montoTotal": 5,
+    "estado": "EN PROCESO",
+    "idCliente": 3
+}
+
+### modificar un pedido con patch
+PATCH http://localhost:3000/api/pedidos/4
+Content-Type: application/json
+
+{
+    "modalidad": "Queso",
+    "montoTotal": 5,
+    "estado": "EN PROCESO",
+    "idCliente": 2
+}
+
+### borrar un pedido
+DELETE http://localhost:3000/api/pedidos/13
